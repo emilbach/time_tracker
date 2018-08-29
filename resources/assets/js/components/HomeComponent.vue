@@ -6,15 +6,24 @@
                 <div class="col-md-12">
 
                     <label for="task_desc">Task Description</label>
-                    <button class="btn btn-sm btn-success pull-right" data-toggle="modal" data-target="#myModal">
-                        Enter custom timer duration
-                    </button>
+                    <div class="btn-toolbar pull-right" role="toolbar">
+                        <div class="btn-group btn-group-sm mr-1" role="group">
+                            <button class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                                Enter custom timer duration
+                            </button>
+                        </div>
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button v-if="task_description.length > 0 && validSave" @click="saveTask"
+                                    class="btn btn-success">Save
+                            </button>
+                            <button v-else disabled class="btn btn-success">Save</button>
+                        </div>
+                    </div>
+
+
                     <textarea v-model="task_description" style="width: 100%" name="task_description" id="task_desc"
                               cols="30" rows="10"></textarea>
-                    <button v-if="task_description.length > 0 && validSave" @click="saveTask"
-                            class="btn btn-success pull-right">Save
-                    </button>
-                    <button v-else disabled class="btn btn-success pull-right">Save</button>
+
                 </div>
             </div>
             <div class="col-md-6">
@@ -104,9 +113,26 @@
             }
         },
         methods: {
+            /**Configuring the basics of the timer and making the timer to be in a user friendly format hh:mm:ss*/
+            updateTime() {
+                if (this.timerID != null) {
+                    this.time.seconds++;
+                }
+                if (this.time.seconds > 59) {
+                    this.time.minutes++;
+                    this.time.seconds = 0;
+                }
+                if (this.time.minutes > 59) {
+                    this.time.hours++;
+                    this.time.minutes = 0;
+                }
+                this.result = this.beautifyTime(this.time.hours, 2) + ':' + this.beautifyTime(this.time.minutes, 2) + ':' + this.beautifyTime(this.time.seconds, 2);
+                $('#myModal').modal('hide')
+            },
+            /**Setting an interval to call the updateTime every second.
+             * The play_pause_flag and stop_flag are for allowing the necessary buttons to be pressed*/
             startTimer() {
                 this.timerID = setInterval(this.updateTime, 1000);
-                this.updateTime();
                 this.play_pause_flag = true;
                 this.stop_flag = true;
             },
@@ -122,19 +148,7 @@
                 this.stop_flag = false;
                 this.timerID = null;
             },
-            updateTime() {
-                this.time.seconds++;
-                if (this.time.seconds > 59) {
-                    this.time.minutes++;
-                    this.time.seconds = 0;
-                }
-                if (this.time.minutes > 59) {
-                    this.time.hours++;
-                    this.time.minutes = 0;
-                }
-                this.result = this.beautifyTime(this.time.hours, 2) + ':' + this.beautifyTime(this.time.minutes, 2) + ':' + this.beautifyTime(this.time.seconds, 2);
-                $('#myModal').modal('hide')
-            },
+            /**If the hours/minutes/seconds are one digit numbers add a 0 in front*/
             beautifyTime(num, digit) {
                 let zero = '';
                 for (let i = 0; i < digit; i++) {
@@ -142,14 +156,13 @@
                 }
                 return (zero + num).slice(-digit);
             },
-            saveTask(e) {
-                e.preventDefault();
+            /**Saving the task and resetting the timer.*/
+            saveTask() {
                 axios.post('save_task', {
                     task_description: this.task_description,
                     duration: this.result,
                     created_at: (this.date_created !== '') ? this.date_created : false
                 }).then(function (response) {
-                    console.log(response.data);
                     this.stopTimer();
                     this.task_description = "";
 

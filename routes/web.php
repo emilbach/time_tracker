@@ -21,4 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/overview', 'HomeController@overview')->name('overview');
 Route::post('/get_tasks', 'HomeController@getSavedTasks')->name('get_tasks');
 Route::post('/save_task', 'HomeController@saveTask')->name('save_task');
-Route::post('/delete_task', 'HomeController@saveTask')->name('save_task');
+Route::post('/delete_task', 'HomeController@deleteTask')->name('deleteTask');
