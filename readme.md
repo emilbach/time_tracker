@@ -18,7 +18,7 @@ Enter the project directory, open a terminal and run the commands:
 <li>password: tester</li>
 </ul>
 </li>
-<li>I recommend to create a virtual host for better experience. :)</li>
+<li>I recommend to create a virtual host for better experience or run the command: php artisan serve.</li>
 </ol>
 
 <hr>
