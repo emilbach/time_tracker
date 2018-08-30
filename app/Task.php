@@ -11,6 +11,10 @@ class Task extends Model
     /**Create new task or update if exists*/
     public function addTask($data)
     {
+        /**
+         * updateOrCreate checks if there's a record with the passed user_id and task_id. If there is, the record is updated,
+         * otherwise a new record is created with the passed data.
+         */
         return $this->updateOrCreate(
             [
                 'user_id' => $data['user_id'],
