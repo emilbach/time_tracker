@@ -13994,7 +13994,7 @@ module.exports = function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(14);
-module.exports = __webpack_require__(47);
+module.exports = __webpack_require__(52);
 
 
 /***/ }),
@@ -47512,6 +47512,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 duration: this.result,
                 created_at: this.date_created !== '' ? this.date_created : false
             }).then(function (response) {
+                alert(response.data);
                 this.stopTimer();
                 this.task_description = "";
             }.bind(this)).catch(function (error) {
@@ -47916,13 +47917,13 @@ if (false) {
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(52)
+  __webpack_require__(45)
 }
 var normalizeComponent = __webpack_require__(11)
 /* script */
-var __vue_script__ = __webpack_require__(45)
+var __vue_script__ = __webpack_require__(50)
 /* template */
-var __vue_template__ = __webpack_require__(46)
+var __vue_template__ = __webpack_require__(51)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -47962,544 +47963,46 @@ module.exports = Component.exports
 
 /***/ }),
 /* 45 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue2_datepicker__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+// style-loader: Adds some css to the DOM by adding a <style> tag
 
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    components: { DatePicker: __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker___default.a },
-    mounted: function mounted() {
-        this.getAllTasks();
-    },
-
-    computed: {
-        filteredTasks: function filteredTasks() {
-            var _this = this;
-
-            return this.tasks.filter(function (task) {
-                return task.task_description.toLowerCase().includes(_this.search.toLowerCase());
-            });
-        }
-    },
-    methods: {
-        getAllTasks: function getAllTasks(value) {
-            axios.post('get_tasks', {
-                dates: value !== undefined ? value : null
-            }).then(function (response) {
-                this.tasks = response.data;
-            }.bind(this)).catch(function (error) {
-                console.log(error.response.data.errors);
-            });
-        },
-        deleteTask: function deleteTask(id, index) {
-            axios.post('delete_task', {
-                id: id
-            }).then(function (response) {
-                this.tasks.splice(index, 1);
-            }.bind(this)).catch(function (error) {
-                console.log(error);
-            });
-        },
-        save_task: function save_task(id, desc, hour, min, sec, created, index) {
-            var dur = this.beautifyTime(hour, 2) + ':' + this.beautifyTime(min, 2) + ':' + this.beautifyTime(sec, 2);
-            this.tasks[index].duration = dur;
-            this.tasks[index].created_at = this.beautifyCreatedDate(created);
-            axios.post('save_task', {
-                task_description: desc,
-                duration: dur,
-                created_at: created,
-                task_id: id
-            }).then(function (response) {
-                this.edit_index = null;
-            }.bind(this)).catch(function (error) {
-                console.log(error.response.data.errors);
-            });
-        },
-        edit_task: function edit_task(id, index) {
-            this.edit_index = id;
-            this.time.hours = this.getDurationElements(this.tasks[index].duration, 0);
-            this.time.minutes = this.getDurationElements(this.tasks[index].duration, 1);
-            this.time.seconds = this.getDurationElements(this.tasks[index].duration, 2);
-        },
-        getDurationElements: function getDurationElements(el, index) {
-            var timer = el.split(':');
-            return timer[index];
-        },
-        beautifyTime: function beautifyTime(num, digit) {
-            var zero = '';
-            for (var i = 0; i < digit; i++) {
-                zero += '0';
-            }
-            return (zero + num).slice(-digit);
-        },
-        beautifyCreatedDate: function beautifyCreatedDate(date) {
-            var el = new Date(date);
-            return el.getFullYear() + "-" + this.beautifyTime(el.getMonth() + 1, 2) + "-" + this.beautifyTime(el.getDate(), 2) + " " + this.beautifyTime(el.getHours(), 2) + ":" + this.beautifyTime(el.getMinutes(), 2) + ":" + this.beautifyTime(el.getSeconds(), 2);
-        }
-    },
-    data: function data() {
-        return {
-            tasks: [],
-            date_range: '',
-            lang: {
-                days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                pickers: ['next 7 days', 'next 30 days', 'previous 7 days', 'previous 30 days'],
-                placeholder: {
-                    date: 'Select Date',
-                    dateRange: 'Select Date Range'
-                }
-            },
-            edit_index: null,
-            time: {
-                hours: 0,
-                minutes: 0,
-                seconds: 0
-            },
-            search: ''
-        };
-    }
-});
+// load the styles
+var content = __webpack_require__(46);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(48)("5c74f66e", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-374ef45d\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./OverviewComponent.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-374ef45d\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./OverviewComponent.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ }),
 /* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-12" }, [
-    _c(
-      "div",
-      { staticClass: "pull-right m-3" },
-      [
-        _c("date-picker", {
-          attrs: { lang: _vm.lang, "not-after": new Date(), range: "" },
-          on: {
-            change: function($event) {
-              _vm.getAllTasks(_vm.date_range)
-            }
-          },
-          model: {
-            value: _vm.date_range,
-            callback: function($$v) {
-              _vm.date_range = $$v
-            },
-            expression: "date_range"
-          }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "pull-right m-3" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.search,
-            expression: "search"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text", placeholder: "Search task description.." },
-        domProps: { value: _vm.search },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.search = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("table", { staticClass: "table table-bordered table-hover mt-5" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "tbody",
-        [
-          _vm.tasks.length < 1
-            ? _c("tr", [_vm._m(1)])
-            : _vm._l(_vm.filteredTasks, function(task, index) {
-                return _c("tr", [
-                  _c("td", [_vm._v(_vm._s(index + 1))]),
-                  _vm._v(" "),
-                  _vm.edit_index === task.id
-                    ? _c("td", [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: task.task_description,
-                              expression: "task.task_description"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text" },
-                          domProps: { value: task.task_description },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                task,
-                                "task_description",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ])
-                    : _c("td", [_vm._v(_vm._s(task.task_description))]),
-                  _vm._v(" "),
-                  _vm.edit_index === task.id
-                    ? _c("td", [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "form-inline input-group input-group-sm"
-                          },
-                          [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.time.hours,
-                                  expression: "time.hours"
-                                }
-                              ],
-                              staticClass: "form-control text-center",
-                              attrs: { id: "hours", type: "number", min: "0" },
-                              domProps: { value: _vm.time.hours },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.time,
-                                    "hours",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("label", { staticClass: "mr-1 ml-1" }, [
-                              _vm._v(":")
-                            ]),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.time.minutes,
-                                  expression: "time.minutes"
-                                }
-                              ],
-                              staticClass: "form-control text-center",
-                              attrs: {
-                                id: "minutes",
-                                type: "number",
-                                min: "0",
-                                max: "59"
-                              },
-                              domProps: { value: _vm.time.minutes },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.time,
-                                    "minutes",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("label", { staticClass: "mr-1 ml-1" }, [
-                              _vm._v(":")
-                            ]),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.time.seconds,
-                                  expression: "time.seconds"
-                                }
-                              ],
-                              staticClass: "form-control text-center",
-                              attrs: {
-                                id: "seconds",
-                                type: "number",
-                                min: "0",
-                                max: "59"
-                              },
-                              domProps: { value: _vm.time.seconds },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.time,
-                                    "seconds",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            })
-                          ]
-                        )
-                      ])
-                    : _c("td", [_vm._v(_vm._s(task.duration))]),
-                  _vm._v(" "),
-                  _vm.edit_index === task.id
-                    ? _c(
-                        "td",
-                        [
-                          _c("date-picker", {
-                            attrs: {
-                              width: "100%",
-                              type: "datetime",
-                              lang: _vm.lang,
-                              "not-after": new Date()
-                            },
-                            model: {
-                              value: task.created_at,
-                              callback: function($$v) {
-                                _vm.$set(task, "created_at", $$v)
-                              },
-                              expression: "task.created_at"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    : _c("td", [_vm._v(_vm._s(task.created_at))]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "text-center" }, [
-                    _vm.edit_index === null
-                      ? _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-sm btn-info",
-                            attrs: { title: "Edit" },
-                            on: {
-                              click: function($event) {
-                                _vm.edit_task(task.id, index)
-                              }
-                            }
-                          },
-                          [_c("i", { staticClass: "fa fa-pencil" })]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.edit_index === task.id
-                      ? _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-sm btn-primary",
-                            attrs: { title: "Save" },
-                            on: {
-                              click: function($event) {
-                                _vm.save_task(
-                                  task.id,
-                                  task.task_description,
-                                  _vm.time.hours,
-                                  _vm.time.minutes,
-                                  _vm.time.seconds,
-                                  task.created_at,
-                                  index
-                                )
-                              }
-                            }
-                          },
-                          [_c("i", { staticClass: "fa fa-save" })]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.edit_index !== null
-                      ? _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-sm btn-info",
-                            attrs: { title: "Cancel" },
-                            on: {
-                              click: function($event) {
-                                _vm.edit_index = null
-                              }
-                            }
-                          },
-                          [_c("i", { staticClass: "fa fa-times" })]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-sm btn-danger",
-                        attrs: { title: "Delete" },
-                        on: {
-                          click: function($event) {
-                            _vm.deleteTask(task.id, index)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fa fa-trash" })]
-                    )
-                  ])
-                ])
-              })
-        ],
-        2
-      )
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Task Description")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Duration")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Created")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Actions")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "text-center", attrs: { colspan: "5" } }, [
-      _c("h3", [_vm._v("No Data")])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-374ef45d", module.exports)
-  }
-}
+exports = module.exports = __webpack_require__(47)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.mx-input-append {\n    height: 30px !important; /* Positioning of the calendar icon in the datepicker component */\n}\n", ""]);
+
+// exports
+
 
 /***/ }),
 /* 47 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 48 */,
-/* 49 */
 /***/ (function(module, exports) {
 
 /*
@@ -48581,49 +48084,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 50 */,
-/* 51 */,
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(53);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(54)("5c74f66e", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-374ef45d\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./OverviewComponent.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-374ef45d\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./OverviewComponent.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(49)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.mx-input-append {\n    height: 30px !important; /* Positioning of the calendar icon in the datepicker component */\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 54 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -48642,7 +48103,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(55)
+var listToStyles = __webpack_require__(49)
 
 /*
 type StyleObject = {
@@ -48851,7 +48312,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 55 */
+/* 49 */
 /***/ (function(module, exports) {
 
 /**
@@ -48882,6 +48343,582 @@ module.exports = function listToStyles (parentId, list) {
   return styles
 }
 
+
+/***/ }),
+/* 50 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue2_datepicker__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: { DatePicker: __WEBPACK_IMPORTED_MODULE_0_vue2_datepicker___default.a },
+    mounted: function mounted() {
+        this.getAllTasks();
+    },
+
+    computed: {
+        filteredTasks: function filteredTasks() {
+            var _this = this;
+
+            return this.tasks.filter(function (task) {
+                return task.task_description.toLowerCase().includes(_this.search.toLowerCase());
+            });
+        }
+    },
+    methods: {
+        getAllTasks: function getAllTasks(value) {
+            axios.post('get_tasks', {
+                dates: value !== undefined ? value : null
+            }).then(function (response) {
+                this.tasks = response.data;
+            }.bind(this)).catch(function (error) {
+                console.log(error.response.data.errors);
+            });
+        },
+        deleteTask: function deleteTask(id, index) {
+            axios.post('delete_task', {
+                id: id
+            }).then(function (response) {
+                alert(response.data);
+                this.tasks.splice(index, 1);
+            }.bind(this)).catch(function (error) {
+                console.log(error);
+            });
+        },
+        save_task: function save_task(id, desc, hour, min, sec, created, index) {
+            var dur = this.beautifyTime(hour, 2) + ':' + this.beautifyTime(min, 2) + ':' + this.beautifyTime(sec, 2);
+            this.tasks[index].duration = dur;
+            this.tasks[index].created_at = this.beautifyCreatedDate(created);
+            axios.post('save_task', {
+                task_description: desc,
+                duration: dur,
+                created_at: created,
+                task_id: id
+            }).then(function (response) {
+                alert(response.data);
+                this.edit_index = null;
+            }.bind(this)).catch(function (error) {
+                console.log(error.response.data.errors);
+            });
+        },
+        edit_task: function edit_task(id, index) {
+            this.edit_index = id;
+            this.time.hours = this.getDurationElements(this.tasks[index].duration, 0);
+            this.time.minutes = this.getDurationElements(this.tasks[index].duration, 1);
+            this.time.seconds = this.getDurationElements(this.tasks[index].duration, 2);
+        },
+        getDurationElements: function getDurationElements(el, index) {
+            var timer = el.split(':');
+            return timer[index];
+        },
+        beautifyTime: function beautifyTime(num, digit) {
+            var zero = '';
+            for (var i = 0; i < digit; i++) {
+                zero += '0';
+            }
+            return (zero + num).slice(-digit);
+        },
+        beautifyCreatedDate: function beautifyCreatedDate(date) {
+            var el = new Date(date);
+            return el.getFullYear() + "-" + this.beautifyTime(el.getMonth() + 1, 2) + "-" + this.beautifyTime(el.getDate(), 2) + " " + this.beautifyTime(el.getHours(), 2) + ":" + this.beautifyTime(el.getMinutes(), 2) + ":" + this.beautifyTime(el.getSeconds(), 2);
+        }
+    },
+    data: function data() {
+        return {
+            tasks: [],
+            date_range: '',
+            lang: {
+                days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                pickers: ['next 7 days', 'next 30 days', 'previous 7 days', 'previous 30 days'],
+                placeholder: {
+                    date: 'Select Date',
+                    dateRange: 'Select Date Range'
+                }
+            },
+            edit_index: null,
+            time: {
+                hours: 0,
+                minutes: 0,
+                seconds: 0
+            },
+            search: ''
+        };
+    }
+});
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-md-12" }, [
+    _c(
+      "div",
+      { staticClass: "pull-right m-3" },
+      [
+        _c("date-picker", {
+          attrs: { lang: _vm.lang, "not-after": new Date(), range: "" },
+          on: {
+            change: function($event) {
+              _vm.getAllTasks(_vm.date_range)
+            }
+          },
+          model: {
+            value: _vm.date_range,
+            callback: function($$v) {
+              _vm.date_range = $$v
+            },
+            expression: "date_range"
+          }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "pull-right m-3" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.search,
+            expression: "search"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text", placeholder: "Search task description.." },
+        domProps: { value: _vm.search },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.search = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("table", { staticClass: "table table-bordered table-hover mt-5" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        [
+          _vm.filteredTasks.length < 1
+            ? _c("tr", [_vm._m(1)])
+            : _vm._l(_vm.filteredTasks, function(task, index) {
+                return _c("tr", [
+                  _c(
+                    "td",
+                    { staticClass: "text-center", attrs: { width: "4%" } },
+                    [_vm._v(_vm._s(index + 1) + ".")]
+                  ),
+                  _vm._v(" "),
+                  _vm.edit_index === task.id
+                    ? _c(
+                        "td",
+                        { staticClass: "text-center", attrs: { width: "50%" } },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: task.task_description,
+                                expression: "task.task_description"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: task.task_description },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  task,
+                                  "task_description",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]
+                      )
+                    : _c(
+                        "td",
+                        { staticClass: "text-center", attrs: { width: "50%" } },
+                        [_vm._v(_vm._s(task.task_description))]
+                      ),
+                  _vm._v(" "),
+                  _vm.edit_index === task.id
+                    ? _c(
+                        "td",
+                        { staticClass: "text-center", attrs: { width: "16%" } },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "form-inline input-group input-group-sm"
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.time.hours,
+                                    expression: "time.hours"
+                                  }
+                                ],
+                                staticClass: "form-control text-center",
+                                attrs: {
+                                  id: "hours",
+                                  type: "number",
+                                  min: "0"
+                                },
+                                domProps: { value: _vm.time.hours },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.time,
+                                      "hours",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("label", { staticClass: "mr-1 ml-1" }, [
+                                _vm._v(":")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.time.minutes,
+                                    expression: "time.minutes"
+                                  }
+                                ],
+                                staticClass: "form-control text-center",
+                                attrs: {
+                                  id: "minutes",
+                                  type: "number",
+                                  min: "0",
+                                  max: "59"
+                                },
+                                domProps: { value: _vm.time.minutes },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.time,
+                                      "minutes",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("label", { staticClass: "mr-1 ml-1" }, [
+                                _vm._v(":")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.time.seconds,
+                                    expression: "time.seconds"
+                                  }
+                                ],
+                                staticClass: "form-control text-center",
+                                attrs: {
+                                  id: "seconds",
+                                  type: "number",
+                                  min: "0",
+                                  max: "59"
+                                },
+                                domProps: { value: _vm.time.seconds },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.time,
+                                      "seconds",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    : _c(
+                        "td",
+                        { staticClass: "text-center", attrs: { width: "16%" } },
+                        [_vm._v(_vm._s(task.duration))]
+                      ),
+                  _vm._v(" "),
+                  _vm.edit_index === task.id
+                    ? _c(
+                        "td",
+                        { staticClass: "text-center", attrs: { width: "20%" } },
+                        [
+                          _c("date-picker", {
+                            attrs: {
+                              width: "100%",
+                              type: "datetime",
+                              lang: _vm.lang,
+                              "not-after": new Date()
+                            },
+                            model: {
+                              value: task.created_at,
+                              callback: function($$v) {
+                                _vm.$set(task, "created_at", $$v)
+                              },
+                              expression: "task.created_at"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    : _c(
+                        "td",
+                        { staticClass: "text-center", attrs: { width: "20%" } },
+                        [_vm._v(_vm._s(task.created_at))]
+                      ),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "text-center", attrs: { width: "10%" } },
+                    [
+                      _vm.edit_index === null
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-sm btn-info",
+                              attrs: { title: "Edit" },
+                              on: {
+                                click: function($event) {
+                                  _vm.edit_task(task.id, index)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-pencil" })]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.edit_index === task.id
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-sm btn-success",
+                              attrs: { title: "Save" },
+                              on: {
+                                click: function($event) {
+                                  _vm.save_task(
+                                    task.id,
+                                    task.task_description,
+                                    _vm.time.hours,
+                                    _vm.time.minutes,
+                                    _vm.time.seconds,
+                                    task.created_at,
+                                    index
+                                  )
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-save" })]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.edit_index !== null
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-sm btn-default",
+                              attrs: { title: "Cancel" },
+                              on: {
+                                click: function($event) {
+                                  _vm.edit_index = null
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-times" })]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-sm btn-danger",
+                          attrs: { title: "Delete" },
+                          on: {
+                            click: function($event) {
+                              _vm.deleteTask(task.id, index)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fa fa-trash" })]
+                      )
+                    ]
+                  )
+                ])
+              })
+        ],
+        2
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "text-center" }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Task Description")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Duration")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Created")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Actions")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "text-center", attrs: { colspan: "5" } }, [
+      _c("h3", [_vm._v("No Data")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-374ef45d", module.exports)
+  }
+}
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

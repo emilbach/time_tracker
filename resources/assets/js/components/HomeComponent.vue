@@ -163,6 +163,7 @@
                     duration: this.result,
                     created_at: (this.date_created !== '') ? this.date_created : false
                 }).then(function (response) {
+                    alert(response.data);
                     this.stopTimer();
                     this.task_description = "";
 

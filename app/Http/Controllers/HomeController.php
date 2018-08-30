@@ -62,7 +62,7 @@ class HomeController extends Controller
 
         /**Returning a response based on whether the request was successful or not.*/
         if ($this->task->addTask($data)) {
-            return response('Successfully added task', 200);
+            return response('Successfully added/edited task', 200);
         } else
             return response('Error while saving task', 500);
     }

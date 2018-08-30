@@ -11,24 +11,26 @@
         <table class="table table-bordered table-hover mt-5">
             <thead>
             <tr>
-                <th>#</th>
-                <th>Task Description</th>
-                <th>Duration</th>
-                <th>Created</th>
-                <th>Actions</th>
+                <th class="text-center">#</th>
+                <th class="text-center">Task Description</th>
+                <th class="text-center">Duration</th>
+                <th class="text-center">Created</th>
+                <th class="text-center">Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr v-if="tasks.length < 1">
+            <tr v-if="filteredTasks.length < 1">
                 <td class="text-center" colspan="5"><h3>No Data</h3></td>
             </tr>
             <tr v-else v-for="(task, index) in filteredTasks">
-                <td>{{index+1}}</td>
-                <td v-if="edit_index === task.id">
+                <td class="text-center" width="4%">{{index+1}}.</td>
+
+                <td width="50%" class="text-center" v-if="edit_index === task.id">
                     <input type="text" class="form-control" v-model="task.task_description">
                 </td>
-                <td v-else>{{task.task_description}}</td>
-                <td v-if="edit_index === task.id">
+                <td width="50%" class="text-center" v-else>{{task.task_description}}</td>
+
+                <td width="16%" class="text-center" v-if="edit_index === task.id">
                     <div class="form-inline input-group input-group-sm">
                         <input id="hours" class="form-control text-center"
                                type="number"
@@ -43,23 +45,25 @@
                                min="0" max="59" v-model="time.seconds">
                     </div>
                 </td>
-                <td v-else>{{task.duration}}</td>
-                <td v-if="edit_index === task.id">
+                <td width="16%" class="text-center" v-else>{{task.duration}}</td>
+
+                <td width="20%" class="text-center" v-if="edit_index === task.id">
                     <date-picker :width="'100%'" v-model="task.created_at" type="datetime" :lang="lang"
                                  :not-after="new Date()"></date-picker>
                 </td>
-                <td v-else>{{task.created_at}}</td>
-                <td class="text-center">
+                <td width="20%" class="text-center" v-else>{{task.created_at}}</td>
+
+                <td width="10%" class="text-center">
                     <button title="Edit" v-if="edit_index === null" class="btn btn-sm btn-info"
                             @click="edit_task(task.id, index)"><i class="fa fa-pencil"></i>
                     </button>
                     <button title="Save"
                             @click="save_task(task.id, task.task_description,
                             time.hours, time.minutes, time.seconds, task.created_at, index)"
-                            v-if="edit_index === task.id" class="btn btn-sm btn-primary"><i
+                            v-if="edit_index === task.id" class="btn btn-sm btn-success"><i
                             class="fa fa-save"></i>
                     </button>
-                    <button title="Cancel" v-if="edit_index !== null" class="btn btn-sm btn-info"
+                    <button title="Cancel" v-if="edit_index !== null" class="btn btn-sm btn-default"
                             @click="edit_index = null"><i class="fa fa-times"></i>
                     </button>
                     <button title="Delete" class="btn btn-sm btn-danger" @click="deleteTask(task.id, index)"><i
@@ -105,6 +109,7 @@
                 axios.post('delete_task', {
                     id: id
                 }).then(function (response) {
+                    alert(response.data);
                     this.tasks.splice(index, 1);
                 }.bind(this)).catch(function (error) {
                     console.log(error)
@@ -120,6 +125,7 @@
                     created_at: created,
                     task_id: id
                 }).then(function (response) {
+                    alert(response.data);
                     this.edit_index = null;
 
                 }.bind(this)).catch(function (error) {
